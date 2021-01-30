@@ -13,9 +13,9 @@ import {
 let loadingInstance; // 创建loading变量
 
 const instance = axios.create({
-  baseURL: baseUrl,
+  baseURL: '/api',
   timeout: 3000,
-  // withCredentials:true// 允许携带cookie
+  withCredentials:true// 允许携带cookie
 })
 
 //请求拦截器
