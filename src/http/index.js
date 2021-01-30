@@ -13,9 +13,9 @@ import {
 let loadingInstance; // 创建loading变量
 
 const instance = axios.create({
-  baseURL: '/api',
+  baseURL: "/api",
   timeout: 3000,
-  withCredentials:true// 允许携带cookie
+  withCredentials: true // 允许携带cookie
 })
 
 //请求拦截器
@@ -27,6 +27,12 @@ instance.interceptors.request.use(
         fullscreen: true
       });
     }
+    // res.writeHead(200, {
+    // "Access-Control-Allow-Origin": "http://192.168.1.102:8080/",
+    // "Access-Control-Allow-Credentials": true
+    // })
+    // Access-Control-Allow-Origin
+    // Cookie: JSESSIONID=6F6F8199B8D1C5BFFD408EAEC5282866
     //获取token
     // let token = 'Bearer ' + localStorage.getItem("admin")
     // if (token) {
@@ -47,10 +53,10 @@ instance.interceptors.response.use(
   response => {
     // 关闭loding效果
     loadingInstance.close();
-    if (response.status == 0) {
-      // return response.data
-      return response.data
-    }
+    // if (response.status == 0) {
+    // return response.data
+    return response
+    // }
   }, error => {
     return Promise.reject(error)
   }

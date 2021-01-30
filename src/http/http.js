@@ -20,8 +20,24 @@ function Edit() {
     method: "post"
   })
 }
+//商品管理
+function Pages(pageNum) {
+  return insteace({
+    url: `manage/product/list.do?pageNum=${pageNum}`,
+    method: "get"
+  })
+}
+//修改状态
+function StatueId(id, status) {
+  return insteace({
+    url: `manage/product/set_sale_status.do?productId=${id}&status=${status}`,
+    method: "get"
+  })
+}
 //注册接口
 export default {
   login,
-  Edit
+  Edit,
+  Pages,
+  StatueId
 }

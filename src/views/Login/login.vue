@@ -21,10 +21,10 @@ export default {
   data() {
     return {
       ruleForm: {
-        // username: "admin",
-        // password: "admin"
-        username: "",
-        password: ""
+        username: "admin",
+        password: "admin"
+        // username: "",
+        // password: ""
       },
       rules: {
         username: [

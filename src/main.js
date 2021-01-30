@@ -6,11 +6,11 @@ import './plugins/element.js'
 
 import axios from './http/http'
 Vue.prototype.$axios = axios
-
+// axios.defaults.withCredentials = true
 
 // //面包屑
 router.beforeEach((to, from, next) => {
-  console.log(to.meta.break)
+  // console.log(to.meta.break)
   store.commit('Break', to.meta.break)
   next()
 })
