@@ -47,7 +47,19 @@ const routes = [
             name: "商品管理"
           }]
         }
-      }
+      },
+      //详情页
+      {
+        path: '/detail',
+        name: 'detail',
+        component: () => import('@/views/goods/detail'),
+        meta: {
+          keepAlive: true,
+          break: [{
+            name: "商品详情"
+          }]
+        }
+      },
     ]
   },
 

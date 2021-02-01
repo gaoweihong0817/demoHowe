@@ -34,10 +34,49 @@ function StatueId(id, status) {
     method: "get"
   })
 }
+//搜索
+function search(data) {
+  return insteace({
+    url: api.search,
+    method: "get",
+    params: data
+    // hideloading:false
+  })
+}
+//详情
+function detail(data) {
+  return insteace({
+    url: api.detail,
+    method: "get",
+    params: data
+  })
+}
+
+//所属品类
+function category(data) {
+  return insteace({
+    url: api.category,
+    method: "get",
+    params: data
+  })
+}
+function categoryed(data) {
+  return insteace({
+    url: api.categoryed,
+    method: "get",
+    params: data
+  })
+}
+
+
 //注册接口
 export default {
   login,
   Edit,
   Pages,
-  StatueId
+  StatueId,
+  search,
+  detail,
+  category,
+  categoryed
 }

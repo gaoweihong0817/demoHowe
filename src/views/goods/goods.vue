@@ -1,5 +1,18 @@
 <template>
   <div class="goods">
+    <!-- 查询 -->
+    <div class="search">
+      <el-select v-model="valueId" placeholder="请选择">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        ></el-option>
+      </el-select>
+      <el-input v-model="input" placeholder="请输入内容"></el-input>
+      <el-button @click="search">查询</el-button>
+    </div>
     <!-- 渲染数据 -->
     <el-table :data="List" stripe style="width: 100%" border>
       <el-table-column prop="id" label="ID"></el-table-column>
@@ -18,14 +31,19 @@
             type="warning"
             size="small"
             v-if="scope.row.status==2"
-            @click="Shang(scope.row)"
+            @click="Shang(scope.row.id,scope.row.status)"
           >上架</el-button>
-          <el-button type="warning" size="small" v-else>下架</el-button>
+          <el-button
+            type="warning"
+            size="small"
+            v-else
+            @click="Shang(scope.row.id,scope.row.status)"
+          >下架</el-button>
         </template>
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <a href="javascript:;">查看</a>&emsp;
+          <a href="javascript:;" @click="Look(scope.row.id)">查看</a>&emsp;
           <a href="javascript:;">编辑</a>
         </template>
       </el-table-column>
@@ -51,8 +69,19 @@ export default {
       //渲染表格
       List: [],
       total: 0,
-      id: "",
-      status: ""
+      //查询
+      options: [
+        {
+          value: "productId",
+          label: "按商品id查询"
+        },
+        {
+          value: "productName",
+          label: "按商品名称查询"
+        }
+      ],
+      valueId: "productId",
+      input: ""
     };
   },
   methods: {
@@ -68,21 +97,24 @@ export default {
       this.pageNum = pageNum;
       this.getList();
     },
-
+    //上下架
     Shang(id, status) {
-      console.log(id);
-      this.id = id.id;
-      this.status = id.status;
-      this.$confirm("确认要上架该商品", "是否继续?", "提示", {
+      console.log(id, status);
+      this.$confirm("确认要上架或下架该商品", "是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
       })
         .then(() => {
-          this.$axios.StatueId(this.id, this.status).then(res => {
-            console.log(res);
-            this.getList();
-          });
+          if (status == 2) {
+            this.$axios.StatueId(id, 1).then(res => {
+              this.getList();
+            });
+          } else {
+            this.$axios.StatueId(id, 2).then(res => {
+              this.getList();
+            });
+          }
         })
         .catch(() => {
           this.$message({
@@ -90,33 +122,31 @@ export default {
             message: "已取消修改"
           });
         });
+    },
+    //查询
+    search() {
+      if (this.valueId == "productId") {
+        this.$axios
+          .search({
+            productId: this.input
+          })
+          .then(res => {
+            this.List = res.data.data.list;
+          });
+      } else if (this.valueId == "productName") {
+        this.$axios
+          .search({
+            productName: this.input
+          })
+          .then(res => {
+            this.List = res.data.data.list;
+          });
+      }
+    },
+    //详情
+    Look(id) {
+      this.$router.push(`/detail?productId=${id}`);
     }
-    // Xia(id, status) {
-    //   console.log(id.id);
-    //   console.log(id.status);
-    //   this.$confirm("确认要下架该商品", "是否继续?", "提示", {
-    //     confirmButtonText: "确定",
-    //     cancelButtonText: "取消",
-    //     type: "warning"
-    //   })
-    //     .then(() => {
-    //       this.productId = id.id;
-    //       // this.status = id.status;
-    //       this.$axios.StatueId({ productId, status: 2 }).then(res => {
-    //         this.$message({
-    //           type: "success",
-    //           message: "已修改成功"
-    //         });
-    //       });
-    //       this.getList();
-    //     })
-    //     .catch(() => {
-    //       this.$message({
-    //         type: "info",
-    //         message: "已取消修改"
-    //       });
-    //     });
-    // }
   },
   mounted() {
     this.getList();
@@ -126,7 +156,8 @@ export default {
 
 <style scoped>
 .el-table,
-.el-pagination {
+.el-pagination,
+.search {
   margin-top: 10px;
 }
 a {
@@ -141,5 +172,9 @@ a {
   position: absolute;
   right: 290px;
   top: 20px;
+}
+.el-input {
+  width: 280px;
+  margin: 0 10px;
 }
 </style>
