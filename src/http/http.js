@@ -53,22 +53,44 @@ function detail(data) {
 }
 
 //所属品类
-function category(data) {
+function category(categoryId) {
   return insteace({
-    url: api.category,
-    method: "get",
-    params: data
-  })
-}
-function categoryed(data) {
-  return insteace({
-    url: api.categoryed,
-    method: "get",
-    params: data
+    url: `manage/category/get_category.do?categoryId=${categoryId}`,
+    method: "get"
   })
 }
 
-
+function categoryed(parentCategoryId) {
+  return insteace({
+    url: `manage/category/get_category.do?categoryId=${parentCategoryId}`,
+    method: "get"
+    // params: data
+  })
+}
+//修改
+function save(params) {
+  return insteace({
+    url: api.save,
+    method: "get",
+    params: params
+  })
+}
+//添加
+function add(params) {
+  return insteace({
+    url: api.add,
+    method: "get",
+    params: params
+  })
+}
+//上传头像
+function UPImg(data) {
+  return insteace({
+    url: api.UPImg,
+    method: "post",
+    data: data
+  })
+}
 //注册接口
 export default {
   login,
@@ -78,5 +100,8 @@ export default {
   search,
   detail,
   category,
-  categoryed
+  categoryed,
+  save,
+  add,
+  UPImg
 }

@@ -12,6 +12,7 @@
       </el-select>
       <el-input v-model="input" placeholder="请输入内容"></el-input>
       <el-button @click="search">查询</el-button>
+      <el-button type="primary" @click="add">商品添加</el-button>
     </div>
     <!-- 渲染数据 -->
     <el-table :data="List" stripe style="width: 100%" border>
@@ -44,7 +45,7 @@
       <el-table-column label="操作">
         <template slot-scope="scope">
           <a href="javascript:;" @click="Look(scope.row.id)">查看</a>&emsp;
-          <a href="javascript:;">编辑</a>
+          <a href="javascript:;" @click="Edit(scope.row.id)">编辑</a>
         </template>
       </el-table-column>
     </el-table>
@@ -146,6 +147,13 @@ export default {
     //详情
     Look(id) {
       this.$router.push(`/detail?productId=${id}`);
+    },
+    Edit(id) {
+      this.$router.push(`/compile?productId=${id}`);
+    },
+    //添加
+    add(){
+       this.$router.push('/add');
     }
   },
   mounted() {

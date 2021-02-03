@@ -60,6 +60,30 @@ const routes = [
           }]
         }
       },
+      //编辑页
+      {
+        path: '/compile',
+        name: 'compile',
+        component: () => import('@/views/goods/compile'),
+        meta: {
+          keepAlive: true,
+          break: [{
+            name: "商品管理 -- 修改商品"
+          }]
+        }
+      },
+      //添加啊
+      {
+        path: '/add',
+        name: 'add',
+        component: () => import('@/views/goods/add'),
+        meta: {
+          keepAlive: true,
+          break: [{
+            name: "商品管理 -- 添加商品"
+          }]
+        }
+      },
     ]
   },
 

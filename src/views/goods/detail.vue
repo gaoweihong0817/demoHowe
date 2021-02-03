@@ -66,18 +66,32 @@ export default {
         productId: this.$route.query.productId
       };
       this.$axios.detail(data).then(res => {
-        // console.log(res.data.data);
+        console.log(res.data.data);
         this.detail = res.data.data;
-      });
-      this.$axios.category().then(res => {
-        console.log(res);
-        this.options = res.data.data;
-      });
-      this.$axios.categoryed().then(res => {
-        console.log(res);
-        this.optioned = res.data.data;
+
+        // this.value1 = res.data.data.categoryId;
+        // this.classfiy(res.data.data.categoryId);
       });
     }
+    //所属分类
+    // async getCategory() {
+    //   let data = {
+    //     categoryId: 0
+    //   };
+    //   let { data: res } = await this.$axios.category(data);
+    //   // console.log(res)
+    //   this.options = res.data;
+    // },
+    // async classfiy(val) {
+    //   //    console.log(this.categoryVal)
+    //   let data = {
+    //     categoryId: val
+    //   };
+    //   console.log(data);
+    //   let { data: res } = await this.$axios.categoryed(data);
+    //   // console.log(res)
+    //   this.optioned = res.data;
+    // }
   },
   mounted() {
     this.getDetail();
