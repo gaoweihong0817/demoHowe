@@ -10,7 +10,7 @@
       </el-header>
       <el-container>
         <el-aside width="200px">
-          <el-menu default-active="2" class="el-menu-vertical-demo" router>
+          <el-menu default-active="2" class="el-menu-vertical-demo" router unique-opened>
             <el-menu-item index="/hollerword">
               <i class="el-icon-menu"></i>
               <span slot="title">首页</span>
@@ -22,7 +22,16 @@
               </template>
               <el-menu-item-group>
                 <el-menu-item index="/goods">商品管理</el-menu-item>
-                <!-- <el-menu-item index="1-2">品类管理</el-menu-item> -->
+                <el-menu-item index="/category">品类管理</el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
+            <el-submenu index="2">
+              <template slot="title">
+                <i class="el-icon-location"></i>
+                <span>订单</span>
+              </template>
+              <el-menu-item-group>
+                <el-menu-item index="/order">订单管理</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
           </el-menu>

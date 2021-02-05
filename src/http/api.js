@@ -15,5 +15,9 @@ export default {
   //添加
   add: "manage/product/save.do?",
   //上传图片
-  UPImg:"manage/product/upload.do"
+  UPImg: "manage/product/upload.do",
+  //品类管理
+  cate: "manage/category/get_category.do?categoryId=0",
+  //修改名称
+  setCategoryName:"manage/category/set_category_name.do?"
 }

@@ -84,6 +84,30 @@ const routes = [
           }]
         }
       },
+      //品类管理
+      {
+        path: '/category',
+        name: 'category',
+        component: () => import('@/views/category/category'),
+        meta: {
+          keepAlive: true,
+          break: [{
+            name: "品类管理"
+          }]
+        }
+      },
+      //订单管理
+      {
+        path: '/order',
+        name: 'order',
+        component: () => import('@/views/order/order'),
+        meta: {
+          keepAlive: true,
+          break: [{
+            name: "订单管理"
+          }]
+        }
+      },
     ]
   },
 

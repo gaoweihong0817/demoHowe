@@ -91,6 +91,22 @@ function UPImg(data) {
     data: data
   })
 }
+
+//品类管理
+function cate() {
+  return insteace({
+    url: api.cate,
+    method: "get"
+  })
+}
+//修改名称
+function setCategoryName(params) {
+  return insteace({
+    url: api.setCategoryName,
+    method: "get",
+    params: params
+  })
+}
 //注册接口
 export default {
   login,
@@ -103,5 +119,7 @@ export default {
   categoryed,
   save,
   add,
-  UPImg
+  UPImg,
+  cate,
+  setCategoryName
 }
